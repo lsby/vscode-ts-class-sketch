@@ -1,4 +1,4 @@
-import { Project } from 'ts-morph'
+import { Project, ts } from 'ts-morph'
 import * as vscode from 'vscode'
 
 let 插件名称 = 'lsby-vscode-ts-class-sketch'
@@ -68,7 +68,7 @@ export function activate(context: vscode.ExtensionContext): void {
         let 参数 = 构造函数
           .getParameters()
           .map((参数) => {
-            return `${参数.getName()}: ${参数.getType().getText()}`
+            return `${参数.getName()}: ${参数.getType().getText(undefined, ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)}`
           })
           .join(', ')
 
@@ -84,7 +84,9 @@ export function activate(context: vscode.ExtensionContext): void {
           .map((mod) => mod.getText())
           .join(' ')
         let 属性名称 = 属性.getName()
-        let 属性类型 = 属性.getType().getText()
+        let 属性类型 = 属性
+          .getType()
+          .getText(undefined, ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
         return `${修饰符} ${属性名称}: ${属性类型};`
       })
       .join('\n')
@@ -97,11 +99,13 @@ export function activate(context: vscode.ExtensionContext): void {
           .map((mod) => mod.getText())
           .join(' ')
         let 方法名称 = 方法.getName()
-        let 方法返回类型 = 方法.getReturnType().getText()
+        let 方法返回类型 = 方法
+          .getReturnType()
+          .getText(undefined, ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
         let 方法参数 = 方法
           .getParameters()
           .map((参数) => {
-            return `${参数.getName()}: ${参数.getType().getText()}`
+            return `${参数.getName()}: ${参数.getType().getText(undefined, ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)}`
           })
           .join(', ')
 
