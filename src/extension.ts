@@ -87,7 +87,7 @@ export function activate(context: vscode.ExtensionContext): void {
         let 属性类型 = 属性
           .getType()
           .getText(undefined, ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
-        return `${修饰符} ${属性名称}: ${属性类型};`
+        return `${修饰符} ${属性名称}: ${属性类型}`
       })
       .join('\n')
 
@@ -109,7 +109,7 @@ export function activate(context: vscode.ExtensionContext): void {
           })
           .join(', ')
 
-        return `${修饰符} ${方法名称}(${方法参数}): ${方法返回类型};`
+        return `${修饰符} ${方法名称}(${方法参数}): ${方法返回类型}`
       })
       .join('\n')
 
